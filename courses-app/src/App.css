@@ -1,0 +1,162 @@
+.header
+{
+    height:70px;
+    width: 100%;
+    box-sizing: border-box;
+  border: 2px solid red;
+  margin-top: 5px;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 5px;
+}
+.logo
+{
+    margin-left: 10%;
+    margin-right : 80%;
+}
+.button
+{
+    border: 2px solid #BE5AF7;
+    padding: 5px;
+    width: 200px;
+    margin-right:5px;
+    margin-top:5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    height: 35px;
+}
+.courses
+{
+    box-sizing: border-box;
+    width:100%;
+    margin-left:20px;
+    margin-right: 20px;
+    border: 2px solid #5D9BFA;
+    padding: 20px;
+}
+.courseCard
+{
+    border: 2px solid #36B04E;
+    margin: 20px;
+    width:100%;
+}
+.title
+{
+    font-size: xx-large;
+    font-weight:400;
+    width:100%;
+}
+.mainInfo
+{
+    width:70%;
+    padding: 30px;
+    vertical-align: top;
+}
+.details
+{
+}
+.boldTd{
+    font-weight: 500;
+    width: 30px;
+    align-items: center;
+    align-self: center;
+    padding: 5px;
+}
+.col{
+    align-items: center;
+    align-self: center;
+    padding: 5px;
+}
+.authors
+{
+    align-items: center;
+    align-self: center;
+    padding: 5px;
+    width:200px;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    white-space:nowrap;
+    display:inline-block
+}
+.colButton
+{
+    padding-left:50px;
+    padding-right:50px;
+}
+.input
+{
+    border:2px solid #FAC054;
+    height: 35px;
+    width:500px;
+    padding:7px;
+}
+.textarea
+{
+    border:2px solid #F5FA54;
+    height: 200px;
+    width:100%;
+    padding:7px;
+    margin-top: 5px;
+}
+.textarea:focus {
+    outline: none !important;
+    border:2px solid #F5FA54;
+    box-shadow: 0 0 10px #F5FA54;
+  }
+.input:focus {
+    outline: none !important;
+    border:2px solid #FAC054;
+    box-shadow: 0 0 10px #FAC054;
+  }
+.search
+{
+    margin: 20px;
+}
+div.addAuthor 
+{
+    border: 2px solid black;
+    padding :20px;
+}
+table.addAuthor 
+{
+    margin: 20px;
+    vertical-align: top;
+    width:100%;
+}
+td.center 
+{
+    text-align: center;
+    width:100%;
+}
+td.top
+{
+    vertical-align: top;
+    width: 50%;
+}
+p.titles
+{
+    font-weight: 500;
+}
+td.names
+{
+    width:50%;
+    padding-left: 200px;
+}
+td.buttons
+{
+    width:50%;
+    padding-left:150px;
+}
+.element
+{
+    width: 100%;
+    box-sizing: border-box;
+}
+p.duration
+{
+    font-size:30px;
+}
+.test
+{
+    width:100%;
+}
