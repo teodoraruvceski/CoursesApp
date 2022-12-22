@@ -23,6 +23,7 @@ function AddDuration() {
       <tr>
         <td>
           <Input
+            className="input"
             type="number"
             onChange={(event) => {
               setHours(Math.floor(event.target.value / 60));

@@ -7,6 +7,8 @@ import Header from './components/Header/Header';
 import Courses from './components/Courses/Courses';
 // import { mockedAuthorsList, mockedCoursesList } from './mockedCoursesList';
 import CreateCourse from './components/CreateCourse/CreateCourse';
+import Registration from './components/Registration/Registration';
+import Login from './components/Login/Login';
 import './App.css';
 
 function App() {
@@ -28,6 +30,14 @@ function App() {
         <Route
           path="/createCourse"
           element={<CreateCourse />}
+        />
+        <Route
+          path="/registration"
+          element={<Registration />}
+        />
+        <Route
+          path="/login"
+          element={<Login />}
         />
 
       </Routes>

@@ -42,6 +42,7 @@ function AddAuthor() {
       <tr>
         <td>
           <Input
+            className="input"
             inputId="addAuthorInput"
             onChange={(event) => {
               setAuthor((prevState) => ({

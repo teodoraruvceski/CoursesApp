@@ -42,6 +42,7 @@ function CreateCourse() {
         <tr>
           <td width="80%">
             <Input
+              className="input"
               width="300px"
               placeholderText="Enter title..."
               onChange={(event) => {
