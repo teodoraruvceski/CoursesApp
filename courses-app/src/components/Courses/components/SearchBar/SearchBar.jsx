@@ -9,7 +9,7 @@ function SearchBar({
     <table className="search">
       <tr>
         <td>
-          <Input placeholderText={placeholderText} labelText={labelText} onChange={onChange} />
+          <Input className="input" placeholderText={placeholderText} labelText={labelText} onChange={onChange} />
         </td>
         <td><Button text="Search" action={action} /></td>
       </tr>
