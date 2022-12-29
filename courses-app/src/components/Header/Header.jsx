@@ -1,17 +1,36 @@
-import React from 'react';
+import { React } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Logo from './components/Logo/Logo';
 import Button from '../common/Button/Button';
 import '../../App.css';
 
 function Header() {
-  // const name = 'button';
+  const navigate = useNavigate();
+
   return (
     <table className="header">
       <tr>
         <td width="10%"><Logo /></td>
         <td width="70%"> </td>
-        <td width="10%">Paul</td>
-        <td width="10%"><Button text="Logout" action={() => { console.log('Button click!'); }} /></td>
+        {
+          localStorage.getItem('token') && <td width="10%">{localStorage.getItem('name')}</td>
+        }
+        {
+        localStorage.getItem('token')
+        && (
+        <td width="10%">
+          <Button
+            className="button"
+            text="Logout"
+            action={() => {
+              localStorage.clear();
+              navigate('/login');
+            }}
+          />
+
+        </td>
+        )
+        }
       </tr>
     </table>
 

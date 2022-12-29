@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Route,
   Routes,
+  Navigate,
 } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Courses from './components/Courses/Courses';
@@ -9,6 +10,7 @@ import Courses from './components/Courses/Courses';
 import CreateCourse from './components/CreateCourse/CreateCourse';
 import Registration from './components/Registration/Registration';
 import Login from './components/Login/Login';
+import CourseInfo from './components/CourseInfo/CourseInfo';
 import './App.css';
 
 function App() {
@@ -23,10 +25,14 @@ function App() {
       {/* <Courses coursesList={mockedCoursesList} authorsList={mockedAuthorsList} /> */}
       <Routes>
         <Route
+          exact
           path="/"
+          element={<Navigate to="/login" />}
+        />
+        <Route
+          path="/courses"
           element={<Courses />}
         />
-        {/* The next line is very important for the Navigate component to work */}
         <Route
           path="/createCourse"
           element={<CreateCourse />}
@@ -38,6 +44,10 @@ function App() {
         <Route
           path="/login"
           element={<Login />}
+        />
+        <Route
+          path="/courseInfo"
+          element={<CourseInfo />}
         />
 
       </Routes>

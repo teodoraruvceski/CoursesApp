@@ -11,7 +11,7 @@ function SearchBar({
         <td>
           <Input className="input" placeholderText={placeholderText} labelText={labelText} onChange={onChange} />
         </td>
-        <td><Button text="Search" action={action} /></td>
+        <td><Button className="button" text="Search" action={action} /></td>
       </tr>
     </table>
   );
