@@ -1,11 +1,26 @@
 import React from 'react';
-import dateFormat from 'dateformat';
+import { useNavigate } from 'react-router-dom';
+// import dateFormat from 'dateformat';
 import Button from '../../../common/Button/Button';
 import '../../../../App.css';
 
 function CourseCard({
-  courseName, description, authors, duration, creationDate,
+
+  courseName, description, authors, duration, creationDate, courseId,
 }) {
+  const navigate = useNavigate();
+  const details = () => {
+    navigate('/courseInfo', {
+      state: {
+        courseName,
+        description,
+        authors,
+        duration,
+        creationDate,
+        courseId,
+      },
+    });
+  };
   // const hours = Math.floor(duration / 60);
   // const minutes = duration % 60;
   // console.log('minutes:', minutes);
@@ -50,11 +65,11 @@ function CourseCard({
                 Created:
               </td>
               <td className="col">
-                {dateFormat(creationDate, 'mm.dd.yyyy')}
+                {creationDate.replaceAll('/', '.')}
               </td>
 
             </tr>
-            <tr><td colSpan={2} className="colButton"><Button text="Show course" action={() => {}} /></td></tr>
+            <tr><td colSpan={2} className="colButton"><Button className="button" text="Show course" action={details} /></td></tr>
           </table>
 
         </td>

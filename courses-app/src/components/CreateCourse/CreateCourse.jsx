@@ -1,7 +1,5 @@
-import React from 'react';
-import { useRecoilState, useResetRecoilState } from 'recoil';
+import { React, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 import Button from '../common/Button/Button';
 import Input from '../common/Input/input';
 import '../../App.css';
@@ -9,25 +7,35 @@ import ListedAuthors from './components/ListedAuthors/ListedAuthors';
 import AddAuthor from './components/AddAuthor/AddAuthor';
 import AddDuration from './components/AddDuration/AddDuration';
 import CourseAuthors from './components/CourseAuthors/CourseAuthors';
-import newCourse from '../../recoil/atom/newCourse';
-import courses from '../../recoil/atom/courses';
+import { getAuthors, getCourses, createCourse } from '../../services/CoursesService';
 // import { mockedAuthorsList, mockedCoursesList } from '../../mockedCoursesList';
 
 function CreateCourse() {
   const navigate = useNavigate();
-  const reset = useResetRecoilState(newCourse);
+  const [authorsState, setAuthorsState] = useState([]);
   // eslint-disable-next-line no-unused-vars
-  const [newCourseState, setNewCourseState] = useRecoilState(newCourse);
-  const [coursesState, setCoursesState] = useRecoilState(courses);
+  const [newCourseState, setNewCourseState] = useState({
+    title: '', description: '', authors: [], duration: 0,
+  });
+  const [coursesState, setCoursesState] = useState([]);
+  useEffect(() => {
+    getAuthors().then((data) => {
+      setAuthorsState(data.data.result);
+      console.log(data.data.result);
+    });
+    getCourses().then((data) => {
+      setCoursesState(data.data.result);
+      console.log(data.data.result);
+    });
+  }, []);
   const create = () => {
+    console.log(newCourseState);
+    console.log(coursesState);
     if (coursesState.find((element) => element.title === newCourseState.title) === undefined
     && document.getElementById('description').value.length >= 2
     && newCourseState.duration > 0) {
-      console.log(newCourseState);
-      setCoursesState((prevState) => ([...prevState, newCourseState]));
-      // useResetRecoilState(newCourse);
-      reset();
-      navigate('/');
+      createCourse(newCourseState);
+      navigate('/courses');
     } else {
       alert('Please, fill in all fields!');
     }
@@ -48,14 +56,13 @@ function CreateCourse() {
               onChange={(event) => {
                 setNewCourseState((prevState) => ({
                   ...prevState,
-                  id: uuidv4(),
                   title: event.target.value,
                 }));
               }}
             />
           </td>
           <td width="20%">
-            <Button text="Create" action={create} />
+            <Button className="button" text="Create" action={create} />
           </td>
         </tr>
       </table>
@@ -67,7 +74,6 @@ function CreateCourse() {
             setNewCourseState((prevState) => ({
               ...prevState,
               description: event.target.value,
-              creationDate: new Date(),
             }));
           }}
           className="textarea"
@@ -78,20 +84,28 @@ function CreateCourse() {
         <table className="addAuthor" width="100%">
           <tr>
             <td className="top">
-              <AddAuthor />
+              <AddAuthor setAuthorsState={setAuthorsState} authorsState={authorsState} />
             </td>
             <td className="top">
-              <ListedAuthors />
+              <ListedAuthors
+                setNewCourseState={setNewCourseState}
+                authors={authorsState}
+                newCourseState={newCourseState}
+              />
             </td>
           </tr>
         </table>
         <table className="addAuthor">
           <tr>
             <td className="top">
-              <AddDuration />
+              <AddDuration setNewCourseState={setNewCourseState} />
             </td>
             <td className="top">
-              <CourseAuthors list={newCourseState.authors} />
+              <CourseAuthors
+                authors={authorsState}
+                newCourseState={newCourseState}
+                setNewCourseState={setNewCourseState}
+              />
             </td>
           </tr>
         </table>

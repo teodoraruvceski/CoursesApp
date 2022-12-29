@@ -1,0 +1,66 @@
+.courses
+{
+    box-sizing: border-box;
+    width:100%;
+    margin-left:20px;
+    margin-right: 20px;
+    border: 2px solid #5D9BFA;
+    margin-top: 20px;
+    padding: 20px;
+}
+.boldTd{
+    font-weight: 500;
+    padding: 5px;
+}
+.col{
+    padding: 5px;
+    width:60px;
+    margin-left: 2px;
+}
+.buttonBack
+{
+    border: 2px solid transparent;
+    padding: 5px;
+    width: 200px;
+    margin-right:5px;
+    margin-top:5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    height: 35px;
+}
+.courseName
+{
+    text-align: center;
+    font-size: xx-large;
+    width:100%;
+
+    column-span: 2;
+}
+.back
+{
+    width:100%;
+    column-span: 2;
+    
+}
+.row
+{
+    
+    width:100%;
+}
+.courseDetails
+{
+}
+.info
+{
+    width:400px;
+}
+.infoTd
+{
+    width:100%;
+    padding: 10px;
+}
+.right
+{
+    vertical-align: top;
+    padding:50px;
+}

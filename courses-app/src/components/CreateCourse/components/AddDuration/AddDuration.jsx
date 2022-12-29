@@ -1,13 +1,10 @@
 import { useState, React } from 'react';
-import { useRecoilState } from 'recoil';
-import newCourse from '../../../../recoil/atom/newCourse';
 import Input from '../../../common/Input/input';
 
-function AddDuration() {
+function AddDuration({ setNewCourseState }) {
   const [minutes, setMinutes] = useState(0);
   const [hours, setHours] = useState(0);
   // eslint-disable-next-line no-unused-vars
-  const [_, setNewCourse] = useRecoilState(newCourse);
   return (
     <table>
       <tr>
@@ -28,9 +25,9 @@ function AddDuration() {
             onChange={(event) => {
               setHours(Math.floor(event.target.value / 60));
               setMinutes(event.target.value % 60);
-              setNewCourse((prevState) => ({
+              setNewCourseState((prevState) => ({
                 ...prevState,
-                duration: event.target.value,
+                duration: Number(event.target.value),
               }));
             }}
             placeholderText="Enter duration in minutes..."
