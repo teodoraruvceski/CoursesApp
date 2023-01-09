@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { React, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../common/Button/Button';
@@ -8,6 +9,8 @@ import AddAuthor from './components/AddAuthor/AddAuthor';
 import AddDuration from './components/AddDuration/AddDuration';
 import CourseAuthors from './components/CourseAuthors/CourseAuthors';
 import { getAuthors, getCourses, createCourse } from '../../services/CoursesService';
+import { courseCreated } from '../../store/courses/actionCreators';
+import store from '../../store/index';
 // import { mockedAuthorsList, mockedCoursesList } from '../../mockedCoursesList';
 
 function CreateCourse() {
@@ -19,22 +22,20 @@ function CreateCourse() {
   });
   const [coursesState, setCoursesState] = useState([]);
   useEffect(() => {
-    getAuthors().then((data) => {
-      setAuthorsState(data.data.result);
-      console.log(data.data.result);
-    });
-    getCourses().then((data) => {
-      setCoursesState(data.data.result);
-      console.log(data.data.result);
+    setAuthorsState(store.getState().authors);
+    const unsubscribe = store.subscribe(() => {
+      setAuthorsState(store.getState().authors);
     });
   }, []);
-  const create = () => {
+  const create = async () => {
     console.log(newCourseState);
     console.log(coursesState);
     if (coursesState.find((element) => element.title === newCourseState.title) === undefined
     && document.getElementById('description').value.length >= 2
     && newCourseState.duration > 0) {
-      createCourse(newCourseState);
+      const response = await createCourse(newCourseState);
+      console.log(response);
+      store.dispatch(courseCreated([response.data.result]));
       navigate('/courses');
     } else {
       alert('Please, fill in all fields!');

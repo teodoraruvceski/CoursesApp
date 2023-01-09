@@ -1,8 +1,12 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+
 // import dateFormat from 'dateformat';
 import Button from '../../../common/Button/Button';
 import '../../../../App.css';
+import { deleteCourse } from '../../../../services/CoursesService';
+import store from '../../../../store/index';
+import { courseDeleted } from '../../../../store/courses/actionCreators';
 
 function CourseCard({
 
@@ -20,6 +24,16 @@ function CourseCard({
         courseId,
       },
     });
+  };
+  const deleteC = async () => {
+    // console.log(courseId);
+    const response = await deleteCourse(courseId);
+    console.log(response);
+    store.dispatch(courseDeleted(courseId));
+    // console.log(store.getState());
+  };
+  const edit = async () => {
+    console.log('edit');
   };
   // const hours = Math.floor(duration / 60);
   // const minutes = duration % 60;
@@ -69,7 +83,11 @@ function CourseCard({
               </td>
 
             </tr>
-            <tr><td colSpan={2} className="colButton"><Button className="button" text="Show course" action={details} /></td></tr>
+            <tr>
+              <td colSpan={2} className="colButton"><Button className="button" text="Show course" action={details} /></td>
+              <td colSpan={2} className="colButtonSmall"><Button className="buttonSmall" text="delete" action={deleteC} /></td>
+              <td colSpan={2} className="colButtonSmall"><Button className="buttonSmall" text="edit" action={edit} /></td>
+            </tr>
           </table>
 
         </td>

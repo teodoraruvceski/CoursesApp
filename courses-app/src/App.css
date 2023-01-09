@@ -53,6 +53,17 @@ a:link {
     margin-left: 5px;
     height: 35px;
 }
+.buttonSmall
+{
+    border: 2px solid #BE5AF7;
+    padding: 5px;
+    width: 35px;
+    margin-right:5px;
+    margin-top:5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    height: 35px;
+}
 
 .courses
 {
@@ -132,7 +143,12 @@ table.registration{
 .colButton
 {
     padding-left:50px;
-    padding-right:50px;
+    padding-right:0px;
+}
+.colButtonSmall
+{
+    padding-left:0px;
+    padding-right:5px;
 }
 .input
 {

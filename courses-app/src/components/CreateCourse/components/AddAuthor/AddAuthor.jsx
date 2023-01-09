@@ -5,6 +5,8 @@ import Button from '../../../common/Button/Button';
 import Input from '../../../common/Input/input';
 import authors from '../../../../recoil/atom/authors';
 import { createAuthor, getAuthors } from '../../../../services/CoursesService';
+import store from '../../../../store/index';
+import { authorCreated } from '../../../../store/authors/actionCreators';
 
 function AddAuthor({ authorsState, setAuthorsState }) {
   // const [authorsState, setAuthorsState] = useRecoilState(authors);
@@ -12,18 +14,20 @@ function AddAuthor({ authorsState, setAuthorsState }) {
     name: '',
   });
 
-  const add = () => {
+  const add = async () => {
     if (document.getElementById('addAuthorInput').value.length >= 2) {
       setAuthorsState((prevVal) => [...prevVal, author]);
-      createAuthor(author).then((data) => {
-        console.log(data);
-      });
-      console.log(author);
+      const response = await createAuthor(author);
+      if (response.data.successful === true) {
+        console.log(response);
+        store.dispatch(authorCreated([response.data.result]));
+        console.log(store.getState().authors);
+      }
       setAuthor({
         name: '',
       });
-      const element = document.getElementById('addAuthorInput');
-      element.value = '';
+      // const element = document.getElementById('addAuthorInput');
+      // element.value = '';
     }
   };
   return (
@@ -49,6 +53,7 @@ function AddAuthor({ authorsState, setAuthorsState }) {
                 name: event.target.value,
               }));
             }}
+            value={author.name}
             placeholderText="Enter author name..."
           />
 

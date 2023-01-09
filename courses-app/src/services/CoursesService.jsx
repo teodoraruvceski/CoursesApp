@@ -1,24 +1,28 @@
 import axios from 'axios';
+import { getToken } from './AuthService';
 
-export const getCourses = () => axios.get('http://localhost:4000/courses/all');
-export const getAuthors = () => axios.get('http://localhost:4000/authors/all');
+const api = 'http://localhost:4000';
+const headers = {
+  'Content-type': 'application/json',
+  Authorization: getToken(),
+};
+const config = {
+  headers,
+};
+export const getCourses = () => axios.get(`${api}/courses/all`);
+export const getAuthors = () => axios.get(`${api}/authors/all`);
 
-export const createAuthor = ((author) => {
+export const createAuthor = (async (author) => {
   console.log(author);
-  const config = {
-    headers: {
-      'Content-type': 'application/json',
-      Authorization: localStorage.getItem('token'),
-    },
-  };
-  axios.post('http://localhost:4000/authors/add', author, config);
+
+  const resp = axios.post(`${api}/authors/add`, author, config);
+  return resp;
 });
-export const createCourse = ((course) => {
-  const config = {
-    headers: {
-      'Content-type': 'application/json',
-      Authorization: localStorage.getItem('token'),
-    },
-  };
-  axios.post('http://localhost:4000/courses/add', course, config);
+export const createCourse = (async (course) => {
+  const resp = await axios.post(`${api}/courses/add`, course, config);
+  return resp;
+});
+export const deleteCourse = (async (id) => {
+  const resp = await axios.delete(`${api}/courses/${id}`, config);
+  return resp;
 });

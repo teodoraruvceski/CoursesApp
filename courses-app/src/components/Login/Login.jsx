@@ -1,8 +1,14 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect, React } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { createRoutesFromElements, Link, useNavigate } from 'react-router-dom';
 import Input from '../common/Input/input';
 import Button from '../common/Button/Button';
 import { login } from '../../services/AuthService';
+import { getAuthors, getCourses } from '../../services/CoursesService';
+import store from '../../store/index';
+import { userLoggedIn } from '../../store/user/actionCreators';
+import { courseCreated } from '../../store/courses/actionCreators';
+import { authorCreated } from '../../store/authors/actionCreators';
 
 function Login() {
   const navigate = useNavigate();
@@ -13,14 +19,17 @@ function Login() {
     password: '',
   });
   useEffect(() => {
-
-  });
-  const loginClick = () => {
-    login(newUser.email, newUser.password).then((data) => {
+    localStorage.clear();
+  }, []);
+  const loginClick = async () => {
+    try {
+      const data = await login(newUser.email, newUser.password);
+      console.log(data);
       if (data.data.successful === true) {
         // const { user } = data.data.user;
-        console.log(data.data.user.name);
+        console.log(data.data);
         const token = data.data.result;
+        console.log(data.data.user);
         localStorage.setItem('token', token);
         localStorage.setItem('name', data.data.user.name);
         document.getElementById('email').value = '';
@@ -30,9 +39,17 @@ function Login() {
           email: '',
           password: '',
         });
+        store.dispatch(userLoggedIn(data.data.user.name, data.data.user.email, data.data.result));
+        const courses = await getCourses();
+        const authors = await getAuthors();
+        // console.log(courses.data.result);
+        store.dispatch(courseCreated(courses.data.result));
+        store.dispatch(authorCreated(authors.data.result));
         navigate('/courses');
       }
-    });
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (

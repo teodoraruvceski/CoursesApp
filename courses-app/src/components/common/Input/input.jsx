@@ -3,7 +3,7 @@ import React from 'react';
 import '../../../App.css';
 
 function Input({
-  width, labelText, placeholderText, onChange, inputId, type, className,
+  width, labelText, placeholderText, onChange, inputId, type, className, value,
 }) {
   return (
     <div>
@@ -16,6 +16,7 @@ function Input({
         contentEditable={labelText}
         placeholder={placeholderText}
         onChange={onChange}
+        value={value}
       />
     </div>
   );

@@ -22,13 +22,6 @@ function Registration() {
         email: '',
         password: '',
       });
-      document.getElementById('name').value = '';
-      document.getElementById('email').value = '';
-      document.getElementById('password').value = '';
-      // const list = document.getElementByTagName('input');
-      // for (let i = 0; i < list.length; i += 1) {
-      //   list[i].value = '';
-      // }
     })
       .catch((error) => {
         console.log(error);
@@ -42,19 +35,19 @@ function Registration() {
         <tr>
           <td className="registrationTd">
             <p className="titles">Name</p>
-            <Input inputId="name" type="text" className="smallInput" placeholderText="Enter name" onChange={(event) => { setNewUser((prevState) => ({ ...prevState, name: event.target.value })); }} />
+            <Input value={newUser.name} inputId="name" type="text" className="smallInput" placeholderText="Enter name" onChange={(event) => { setNewUser((prevState) => ({ ...prevState, name: event.target.value })); }} />
           </td>
         </tr>
         <tr>
           <td className="registrationTd">
             <p className="titles">Email</p>
-            <Input inputId="email" type="text" className="smallInput" placeholderText="Enter email" onChange={(event) => { setNewUser((prevState) => ({ ...prevState, email: event.target.value })); }} />
+            <Input value={newUser.email} inputId="email" type="text" className="smallInput" placeholderText="Enter email" onChange={(event) => { setNewUser((prevState) => ({ ...prevState, email: event.target.value })); }} />
           </td>
         </tr>
         <tr>
           <td className="registrationTd">
             <p className="titles">Password</p>
-            <Input inputId="password" type="password" className="smallInput" placeholderText="Enter password" onChange={(event) => { setNewUser((prevState) => ({ ...prevState, password: event.target.value })); }} />
+            <Input value={newUser.password} inputId="password" type="password" className="smallInput" placeholderText="Enter password" onChange={(event) => { setNewUser((prevState) => ({ ...prevState, password: event.target.value })); }} />
           </td>
         </tr>
         <tr>

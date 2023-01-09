@@ -9,6 +9,9 @@ import '../../App.css';
 import courses from '../../recoil/atom/courses';
 import authors from '../../recoil/atom/authors';
 import { getCourses, getAuthors } from '../../services/CoursesService';
+import store from '../../store/index';
+import { courseCreated } from '../../store/courses/actionCreators';
+import { authorCreated } from '../../store/authors/actionCreators';
 
 function Courses() {
   // const [coursesState, setCoursesState] = useRecoilState(courses);
@@ -19,20 +22,30 @@ function Courses() {
   const [coursesList, setCoursesList] = useState(coursesState);
   const navigate = useNavigate();
   useEffect(() => {
+    const state = store.getState();
+    const unsubscribe = store.subscribe(() => {
+      setCoursesState(store.getState().courses);
+      setCoursesList(store.getState().courses);
+    });
     if (localStorage.getItem('token') === null) {
       navigate('/login');
     } else {
-      getCourses().then((data) => {
-        console.log(data.data);
-        setCoursesState(data.data.result);
-        setCoursesList(data.data.result);
-      });
+      // getCourses().then((data) => {
+      //   console.log(data.data);
+      //   setCoursesState(data.data.result);
+      //   setCoursesList(data.data.result);
+      // });
 
-      getAuthors().then((data) => {
-        console.log(data.data);
-        setAuthorsState(data.data.result);
-      });
+      console.log(state);
+      setCoursesList(state.courses);
+
+      setAuthorsState(state.authors);
+      // getAuthors().then((data) => {
+      //   console.log(data.data);
+      //   setAuthorsState(data.data.result);
+      // });
     }
+    return unsubscribe;
   }, []);
 
   const search = () => {
