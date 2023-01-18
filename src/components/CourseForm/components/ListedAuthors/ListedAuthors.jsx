@@ -7,7 +7,7 @@ function ListedAuthors({ newCourseState, setNewCourseState }) {
   const authors = useSelector((state) => state.authors);
   useEffect(() => {
     const unsubscribe = store.subscribe(() => window.location.reload(false));
-    unsubscribe();
+    return unsubscribe();
   });
   const addAuthor = (event) => {
     const authorName = event.currentTarget.name;

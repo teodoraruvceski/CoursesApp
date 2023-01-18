@@ -15,9 +15,10 @@ function Courses() {
   const [searchContent, setSearchContent] = useState('');
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
+  const [changes,setChanges]=useState(true);
   const coursesState = useSelector((state) => state.courses);
   useEffect(() => {
-    const unsubscribe = store.subscribe(() => window.location.reload(false));
+    const unsubscribe = store.subscribe(() => setChanges(!changes));
 
     const get = async () => {
       const courses = await getCourses();
@@ -30,8 +31,8 @@ function Courses() {
     if (localStorage.getItem('token') === null) {
       navigate('/login');
     }
-    unsubscribe();
-  }, []);
+    return unsubscribe();
+  }, [changes]);
 
   // const search = () => {
   //   if (searchContent.trim() === '') {
